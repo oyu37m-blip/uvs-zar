@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { useRouter } from 'next/navigation'
 
@@ -24,6 +24,20 @@ export default function PostPage() {
   const [loc, setLoc] = useState('Ulaangom')
   const [phone, setPhone] = useState('')
   const [catId, setCatId] = useState(1)
+  const [subCatId, setSubCatId] = useState<number|null>(null)
+  const [subcats, setSubcats] = useState<any[]>([])
+
+  useEffect(() => {
+    async function loadSubs() {
+      const { data } = await supabase
+        .from('subcategories')
+        .select('*')
+        .eq('category_id', catId)
+      setSubcats(data || [])
+      setSubCatId(null)
+    }
+    loadSubs()
+  }, [catId])
 
   async function handleSubmit() {
     if (!title || !phone) {
@@ -38,6 +52,7 @@ export default function PostPage() {
       location: loc,
       phone,
       category_id: catId,
+      subcategory_id: subCatId,
       status: 'active',
       is_anonymous: true,
     })
@@ -61,6 +76,7 @@ export default function PostPage() {
         <div style={{ fontSize: 17, fontWeight: 700 }}>Zar nemeh</div>
       </div>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
+
         <div style={{ background: '#fff', borderRadius: 12, padding: 14 }}>
           <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 10 }}>Angilal songoh</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
@@ -73,13 +89,29 @@ export default function PostPage() {
             ))}
           </div>
         </div>
+
+        {subcats.length > 0 && (
+          <div style={{ background: '#fff', borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 10 }}>Ded angilal songoh</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {subcats.map(s => (
+                <button key={s.id} onClick={() => setSubCatId(s.id)}
+                  style={{ padding: '8px 16px', borderRadius: 20, border: subCatId === s.id ? '2px solid #1D9E75' : '1px solid #ddd', background: subCatId === s.id ? '#E1F5EE' : '#fff', cursor: 'pointer', fontSize: 13, color: subCatId === s.id ? '#0F6E56' : '#555' }}>
+                  {s.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div style={{ background: '#fff', borderRadius: 12, padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Garchig *</label><input value={title} onChange={e => setTitle(e.target.value)} placeholder="jnh: iPhone 13 zarna" style={inp} /></div>
+          <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Garchig *</label><input value={title} onChange={e => setTitle(e.target.value)} placeholder="jnh: 2 uruu orон suuts zarна" style={inp} /></div>
           <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Une</label><input value={price} onChange={e => setPrice(e.target.value)} placeholder="0 = Une tohoroltsono" style={inp} /></div>
           <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Bairshil</label><input value={loc} onChange={e => setLoc(e.target.value)} placeholder="Ulaangom" style={inp} /></div>
           <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Tailbar</label><textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="Delgerenguui medeelel..." rows={4} style={{ ...inp, resize: 'vertical' }} /></div>
           <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Utasny dugaar *</label><input value={phone} onChange={e => setPhone(e.target.value)} placeholder="9999 9999" style={inp} type="tel" /></div>
         </div>
+
         <button onClick={handleSubmit} disabled={loading}
           style={{ background: loading ? '#aaa' : '#1D9E75', color: '#fff', border: 'none', borderRadius: 12, padding: 15, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer' }}>
           {loading ? 'Niitlejj baina...' : 'Zar niitleh'}
