@@ -54,7 +54,7 @@ export default function PostPage() {
   const [title, setTitle] = useState('')
   const [desc, setDesc] = useState('')
   const [price, setPrice] = useState('')
-  const [loc, setLoc] = useState('Ulaangom')
+  const [loc, setLoc] = useState('Улаангом')
   const [phone, setPhone] = useState('')
 
   function selectCat(id: number) {
@@ -70,7 +70,7 @@ export default function PostPage() {
 
   function selectPropType(val: string) {
     setPropType(val)
-    if (val === 'apartment') setStep(STEPS.ROOM)
+    if (val === 'Орон сууц') setStep(STEPS.ROOM)
     else setStep(STEPS.FORM)
   }
 
@@ -82,7 +82,7 @@ export default function PostPage() {
   async function handleSubmit() {
     if (!title || !phone) {
       alert('Гарчиг болон утасны дугаарыг бөглөнө үү')
-      return
+      retfunction selectproptypen
     }
     setLoading(true)
      const fullTitle = title
@@ -183,9 +183,9 @@ export default function PostPage() {
           <>
             <div style={{ background: '#E1F5EE', borderRadius: 12, padding: 12, fontSize: 13, color: '#0F6E56' }}>
               ✓ {MAIN_CATS.find(c => c.id === catId)?.name}
-              {sellRent && ` → ${sellRent === 'sell' ? 'Zarах' : 'Tureesleh'}`}
+              {sellRent && ` → ${sellRent === 'sell' ? 'Зарах' : 'Түрээслэх'}`}
               {propType && ` → ${PROPERTY_TYPES.find(p => p.id === propType)?.name}`}
-              {rooms && ` → ${rooms} uruu`}
+              {rooms && ` → ${rooms} өрөө`}
             </div>
             <div style={{ background: '#fff', borderRadius: 12, padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Гарчиг *</label><input value={title} onChange={e => setTitle(e.target.value)} placeholder="Нэмэлт мэдээлэл..." style={inp} /></div>
