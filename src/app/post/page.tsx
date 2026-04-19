@@ -12,35 +12,35 @@ const STEPS = {
 }
 
 const MAIN_CATS = [
-  { id: 1, name: 'Ul hodloh', icon: '🏠' },
-  { id: 2, name: 'Teevriyn heregsel', icon: '🚗' },
-  { id: 3, name: 'Ajil', icon: '💼' },
-  { id: 4, name: 'Elektron', icon: '📱' },
-  { id: 5, name: 'Huvtsas', icon: '👗' },
-  { id: 6, name: 'Mal', icon: '🐄' },
-  { id: 7, name: 'Huns', icon: '🥩' },
-  { id: 8, name: 'Uilchilgee', icon: '🔧' },
-  { id: 9, name: 'Busad', icon: '📦' },
+  { id: 1, name: 'Үл хөдлөх', icon: '🏠' },
+  { id: 2, name: 'Тээврийн хэрэгсэл', icon: '🚗' },
+  { id: 3, name: 'Ажлын зар', icon: '💼' },
+  { id: 4, name: 'Гар утас, цахилгаан бараа', icon: '📱' },
+  { id: 5, name: 'Хувцас хэрэгсэл', icon: '👗' },
+  { id: 6, name: 'Мал', icon: '🐄' },
+  { id: 7, name: 'Гэр ахуйн бараа', icon: '🥩' },
+  { id: 8, name: 'Үйлчилгээ', icon: '🔧' },
+  { id: 9, name: 'Бусад', icon: '📦' },
 ]
 
 const SELL_RENT = [
-  { id: 'sell', name: 'Zarах' },
-  { id: 'rent', name: 'Tureesleh' },
+  { id: 'sell', name: 'Зарах' },
+  { id: 'rent', name: 'Түрээслүүлэх' },
 ]
 
 const PROPERTY_TYPES = [
-  { id: 'apartment', name: 'Orон suuts' },
-  { id: 'house', name: 'Hashaa baishing' },
-  { id: 'land', name: 'Gazar' },
-  { id: 'object', name: 'Obьekt' },
-  { id: 'office', name: 'Ofis talbai' },
+  { id: 'apartment', name: 'Орон сууц' },
+  { id: 'house', name: 'Хашаа байшин' },
+  { id: 'land', name: 'Газар' },
+  { id: 'object', name: 'Обьект' },
+  { id: 'office', name: 'Оффис талбай' },
 ]
 
 const ROOMS = [
-  { id: '1', name: '1 uruu' },
-  { id: '2', name: '2 uruu' },
-  { id: '3', name: '3 uruu' },
-  { id: '4+', name: '4+ uruu' },
+  { id: '1', name: '1 өрөө' },
+  { id: '2', name: '2 өрөө' },
+  { id: '3', name: '3 өрөө' },
+  { id: '4+', name: '4+ өрөө' },
 ]
 
 export default function PostPage() {
@@ -81,7 +81,7 @@ export default function PostPage() {
 
   async function handleSubmit() {
     if (!title || !phone) {
-      alert('Garchig bolон utasny dugaarыg boglono uu')
+      alert('Гарчиг болон утасны дугаарыг бөглөнө үү')
       return
     }
     setLoading(true)
@@ -125,11 +125,11 @@ export default function PostPage() {
       <div style={{ background: '#fff', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid #eee', position: 'sticky', top: 0, zIndex: 10 }}>
         <button onClick={() => step > 1 ? setStep(step - 1) : router.back()} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
         <div style={{ fontSize: 17, fontWeight: 700 }}>
-          {step === STEPS.CATEGORY && 'Angilal songoh'}
-          {step === STEPS.SUBCATEGORY && 'Zar/Turees songoh'}
-          {step === STEPS.DETAIL_TYPE && 'Torol songoh'}
-          {step === STEPS.ROOM && 'Uruuriin too'}
-          {step === STEPS.FORM && 'Medeelel bogloh'}
+          {step === STEPS.CATEGORY && 'Ангилал сонгох'}
+          {step === STEPS.SUBCATEGORY && 'Зар/Түрээс сонгох'}
+          {step === STEPS.DETAIL_TYPE && 'Төрөл сонгох'}
+          {step === STEPS.ROOM && 'Өрөөний тоо'}
+          {step === STEPS.FORM && 'Мэдээлэл бөглөх'}
         </div>
       </div>
 
@@ -188,15 +188,15 @@ export default function PostPage() {
               {rooms && ` → ${rooms} uruu`}
             </div>
             <div style={{ background: '#fff', borderRadius: 12, padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Garchig *</label><input value={title} onChange={e => setTitle(e.target.value)} placeholder="Nemelteer medeelel..." style={inp} /></div>
-              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Une</label><input value={price} onChange={e => setPrice(e.target.value)} placeholder="0 = Une tohoroltsono" style={inp} /></div>
-              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Bairshil</label><input value={loc} onChange={e => setLoc(e.target.value)} placeholder="Ulaangom" style={inp} /></div>
-              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Tailbar</label><textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="Delgerenguui medeelel..." rows={4} style={{ ...inp, resize: 'vertical' }} /></div>
-              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Utasny dugaar *</label><input value={phone} onChange={e => setPhone(e.target.value)} placeholder="9999 9999" style={inp} type="tel" /></div>
+              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Гарчиг *</label><input value={title} onChange={e => setTitle(e.target.value)} placeholder="Нэмэлт мэдээлэл..." style={inp} /></div>
+              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Үнэ</label><input value={price} onChange={e => setPrice(e.target.value)} placeholder="0 = Үнэ тохиролцоно" style={inp} /></div>
+              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Байршил</label><input value={loc} onChange={e => setLoc(e.target.value)} placeholder="Улаангом" style={inp} /></div>
+              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Тайлбар</label><textarea value={desc} onChange={e => setDesc(e.target.value)} placeholder="Дэлгэрэнгүй мэдээлэл..." rows={4} style={{ ...inp, resize: 'vertical' }} /></div>
+              <div><label style={{ fontSize: 13, fontWeight: 600, color: '#555' }}>Утасны дугаар *</label><input value={phone} onChange={e => setPhone(e.target.value)} placeholder="9999 9999" style={inp} type="tel" /></div>
             </div>
             <button onClick={handleSubmit} disabled={loading}
               style={{ background: loading ? '#aaa' : '#1D9E75', color: '#fff', border: 'none', borderRadius: 12, padding: 15, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer' }}>
-              {loading ? 'Niitlejj baina...' : 'Zar niitleh'}
+              {loading ? 'Нийтэлж байна...' : 'Зар нийтлэх'}
             </button>
           </>
         )}
