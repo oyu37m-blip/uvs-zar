@@ -46,9 +46,11 @@ export default function PostPage() {
     <main style={{ maxWidth: 480, margin: '0 auto', fontFamily: 'sans-serif', background: '#f5f5f5', minHeight: '100vh' }}>
       <div style={{ background: '#fff', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid #eee', position: 'sticky', top: 0, zIndex: 10 }}>
         <button onClick={() => {
-  if (step === 5 && propType !== 'Орон сууц') setStep(3)
+  if (step === 5 && propType !== '') setStep(3)
+  else if (step === 5 && catId !== 1) setStep(1)
   else if (step > 1) setStep(step - 1)
   else router.back()
+}}
 }} style={{ background: 'none', border: 'none', fontSize: 22, cursor: 'pointer' }}>←</button>
         <div style={{ fontSize: 17, fontWeight: 700 }}>
           {step === 1 && 'Ангилал сонгох'}
